@@ -1,0 +1,46 @@
+#blueBall{
+    background-color:blue;
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+}
+#redBall{
+    background-color:red;
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+}
+#yellowBall{
+    background-color:yellow;
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+}
+#greenBall{
+    background-color:green;
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+}
+.slot{
+    display: inline-block;
+    width:50px;
+    height:50px;
+    border: 1px solid;
+    border-radius: 50%;
+    overflow:hidden;
+}
+.ballSlot{
+    display: inline-block;
+    width:50px;
+    height:50px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+.colorBall{
+    cursor: grab;
+    display: inline-block;
+}
+.colorBall:active {
+    cursor: grabbing;
+}
