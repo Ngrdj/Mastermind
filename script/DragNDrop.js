@@ -3,7 +3,7 @@
     
 const slots = document.querySelectorAll('.slot');
 const ballSlots = document.querySelectorAll('.ballSlot');
-const colorBalls = document.querySelectorAll('.colorBall');
+
 let currentBall;
 
 /*--------------------------------------------------Evenements------------------------------------------------------------*/

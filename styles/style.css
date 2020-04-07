@@ -44,3 +44,6 @@
 .colorBall:active {
     cursor: grabbing;
 }
+.empty {
+    display:none;
+}
