@@ -1,5 +1,6 @@
  
 /*--------------------------------------------------Variables------------------------------------------------------------*/
+const levelSelect = document.getElementById("levelSelect");
 const submit = document.getElementById("submit");
 const reset = document.getElementById("reset");
 
@@ -18,13 +19,15 @@ let randomSeq = []
 
 /*--------------------------------------------------Evenements------------------------------------------------------------*/
 
-
 document.addEventListener('DOMContentLoaded',genRandomSeq);
 submit.addEventListener('click', compareSeq);
-reset.addEventListener('click', genRandomSeq);
-
+reset.addEventListener('click', reload);
+levelSelect.addEventListener('change',reload);
 
 /*--------------------------------------------------Fonctions------------------------------------------------------------*/
+function reload (){
+    genRandomSeq();
+}
 function addEmptySlot () {
     
     const newSlot = document.createElement("div");
@@ -49,7 +52,7 @@ function genRandomSeq () {
         randomSeq.push(colorBalls[nbalea].id);
     
     }
-  
+  console.log(randomSeq);
 }
 
 function compareSeq () {
