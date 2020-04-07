@@ -70,6 +70,13 @@ function compareSeq () {
 
         }
     }
+
+    
+    // playerSeqValue.forEach((playerItem, playerItemIndex) => {
+    //     // ton code
+    // })
+    
+
     for (const [playerItemIndex, playerItem] of playerSeqValue.entries()) {
         
         for (const [gameItemIndex, gameItem] of randomSeq.entries()){

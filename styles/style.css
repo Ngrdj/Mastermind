@@ -47,3 +47,16 @@
 .empty {
     display:none;
 }
+
+.mode-menu .menu{
+    display: block;
+}
+.mode-menu .game{
+    display: none;
+}
+.mode-game .menu{
+    display: none;
+}
+.mode-game .game{
+    display: block;
+}
