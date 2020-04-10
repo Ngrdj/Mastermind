@@ -1,49 +1,113 @@
-#blueBall{
-    background-color:blue;
+main{
+    display: grid;
+    grid-auto-rows: minmax(100px, auto);
+    align-items: center;
+    justify-content: center;
+    background-color: #bfd8d9;
+    border-style: ridge;
+    width:600px;
+    border-radius:10%;
+}
+#title{
+    padding: 5px;
+    width: 500px;
+    background-color:cadetblue;
+    border-style: outset;
+    justify-self: center;
+}
+.ballSlot{
+    
+    width:50px;
+    height:50px;
+    border: 1px solid;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#colorBalls{
+    grid-row: 4;
+    grid-column: 1;
+    display:flex;
+    justify-content: flex-start;
+    width: 500px;
+    padding: 20px;
+    background-color:cadetblue;
+    border-radius:10% / 50%;
+    grid-row: 4;
+    border-style: outset;
+    
+}
+.colorBall{
+    cursor: grab;
     width:50px;
     height:50px;
     border-radius: 50%;
+}
+.colorBall:active {
+    cursor: grabbing;
+}
+#blueBall{
+    background-color:blue;
 }
 #redBall{
     background-color:red;
-    width:50px;
-    height:50px;
-    border-radius: 50%;
 }
 #yellowBall{
     background-color:yellow;
-    width:50px;
-    height:50px;
-    border-radius: 50%;
 }
 #greenBall{
     background-color:green;
-    width:50px;
-    height:50px;
-    border-radius: 50%;
+}
+#purpleBall{
+    background-color:purple;
+}
+#orangeBall{
+    background-color:orange;
+}
+#pinkBall{
+    background-color:pink;
+}
+#playerSeq {
+
+    display: grid;
+    align-items: center;
+
+}
+#entry {
+    border-style: outset;
+    padding: 40px;
+    display:flex;
+    justify-content: flex-start;
+    width: 500px ;
+    padding: 20px;
+    grid-row: 5;
+    grid-column: 1;
+    background-color:white;
+    border-radius:10% / 50%;
 }
 .slot{
-    display: inline-block;
+
     width:50px;
     height:50px;
     border: 1px solid;
     border-radius: 50%;
     overflow:hidden;
-}
-.ballSlot{
-    display: inline-block;
-    width:50px;
-    height:50px;
-    border: 1px solid;
-    border-radius: 50%;
-}
-.colorBall{
-    cursor: grab;
-    display: inline-block;
-}
-.colorBall:active {
-    cursor: grabbing;
+    margin-right: 10px;
+    
 }
 .empty {
     display:none;
+}
+#submit {
+    margin-right:10px;
+    background-color:cadetblue;
+    justify-self: flex-end;
+    grid-column: 1;
+    grid-row: 5;
+    font-size: 15pt;
+    border-radius: 30% / 50%;
+    width: 100px;
+    height: 60px;
+    
+    
 }

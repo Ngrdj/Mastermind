@@ -5,6 +5,7 @@ const slots = document.querySelectorAll('.slot');
 const ballSlots = document.querySelectorAll('.ballSlot');
 
 let currentBall;
+let lastSlot;
 
 /*--------------------------------------------------Evenements------------------------------------------------------------*/
 
@@ -30,7 +31,7 @@ for (const ballSlot of ballSlots) {
 /*--------------------------------------------------Fonctions------------------------------------------------------------*/
 
 function dragStart() {
-    
+
 currentBall=this;
     
 }
@@ -52,16 +53,16 @@ function dragEnter(e) {
     
 }
 function dragLeave() {
-    
-
+    console.log(this);
+lastSlot = this;
     
 }
 function dragDrop() {
-    /*console.log(this);*/
-    /*if(this.hasChildNodes()){
-
-    }else{*/
+    console.log(this.children.length)
+    if(this.children.length > 0){
+        lastSlot.append(currentBall);
+    }else{
         this.append(currentBall);
-   /* }*/
+    }
     
 }

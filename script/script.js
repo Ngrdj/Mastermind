@@ -1,4 +1,3 @@
- /*ok*/
 /*--------------------------------------------------Variables------------------------------------------------------------*/
 const levelSelect = document.getElementById("levelSelect");
 const submit = document.getElementById("submit");
@@ -9,8 +8,11 @@ const red = document.getElementById("redBall");
 const blue = document.getElementById("blueBall");
 const green = document.getElementById("greenBall");
 const yellow = document.getElementById("yellowBall");
+const purple = document.getElementById("purpleBall");
+const orange = document.getElementById("orangeBall");
+const pink = document.getElementById("pinkBall");
 
-/*if(level3....checked){*/
+/*if(level3,level2){*/
 addEmptySlot();
 
 let colorBalls = document.querySelectorAll('.colorBall');
@@ -21,6 +23,7 @@ let randomSeq = []
 
 document.addEventListener('DOMContentLoaded',genRandomSeq);
 submit.addEventListener('click', compareSeq);
+submit.addEventListener('click', copyRow);
 reset.addEventListener('click', reload);
 levelSelect.addEventListener('change',reload);
 
@@ -28,6 +31,7 @@ levelSelect.addEventListener('change',reload);
 function reload (){
     genRandomSeq();
 }
+
 function addEmptySlot () {
     
     const newSlot = document.createElement("div");
@@ -70,9 +74,8 @@ function compareSeq () {
 
         }
     }
-    for (const [playerItemIndex, playerItem] of playerSeqValue.entries()) {
-        
-        for (const [gameItemIndex, gameItem] of randomSeq.entries()){
+    playerSeqValue.forEach((playerItem, playerItemIndex) => {
+        randomSeq.forEach((gameItem, gameItemIndex) => {  
             
                  if(playerItem === gameItem && playerItemIndex === gameItemIndex){
                      
@@ -83,21 +86,16 @@ function compareSeq () {
                      resultArr.push("white")
                      
                  }
-             }
-        }
-    
-
-    /*for (const [playerItemIndex, playerItem] of ) */
-//comparaison du tableau temporaire avec la séquence aleatoire
-    
-    
-    /*if(playerSeqValue.some(e => randomSeq.includes(e))){
-        
-            resultArr.push("white")
-        
-    }*/
+             })
+        })   
     
     console.log("séquence jeu : " + randomSeq); 
     console.log("séquence joueur : " + playerSeqValue);
     console.log(resultArr);
+}
+
+function copyRow () {
+    const currentRow=this.parentNode;
+    console.log(this.parentNode)
+    currentRow.cloneNode(true);
 }
