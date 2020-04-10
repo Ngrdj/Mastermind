@@ -19,16 +19,26 @@ let colorBalls = document.querySelectorAll('.colorBall');
 let playerSeq = document.querySelectorAll(".slot");
 let randomSeq = []
 
+let counter = 0;
+
 /*--------------------------------------------------Evenements------------------------------------------------------------*/
 
-document.addEventListener('DOMContentLoaded',genRandomSeq);
-submit.addEventListener('click', compareSeq);
+document.addEventListener('DOMContentLoaded',reload);
+
+submit.addEventListener('click', ()=>{counter++});
 submit.addEventListener('click', copyRow);
+submit.addEventListener('click', compareSeq);
+
 reset.addEventListener('click', reload);
 levelSelect.addEventListener('change',reload);
 
+if(counter >= 10) {
+    gameOver();
+}
+
 /*--------------------------------------------------Fonctions------------------------------------------------------------*/
 function reload (){
+    counter = 0;
     genRandomSeq();
 }
 
@@ -56,11 +66,10 @@ function genRandomSeq () {
         randomSeq.push(colorBalls[nbalea].id);
     
     }
-  console.log(randomSeq);
 }
 
 function compareSeq () {
-//creation d'un tableau temporaire contenant le choix du joueur
+
     let playerSeqValue=[];
     let resultArr = [];
     
@@ -95,7 +104,20 @@ function compareSeq () {
 }
 
 function copyRow () {
-    const currentRow=this.parentNode;
-    console.log(this.parentNode)
-    currentRow.cloneNode(true);
+    
+    let currentRow=this.previousElementSibling;
+
+    let newRow = currentRow.cloneNode(true);
+    document.getElementById("playerSeq").appendChild(newRow);
+    newRow.style.gridRow=counter;
+    newRow.style.gridRow=counter;
+    //empêcher le drag des newLines
+    /*console.log(newRow.children)
+    newRow.children.setAttribute("draggable", "false");*/
+    /*console.log(newRow);*/
+    
+}
+
+function gameOver() {
+    alert("gameOver");
 }
