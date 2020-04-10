@@ -9,7 +9,7 @@ main{
     background-color: #bfd8d9;
     border-style: ridge;
     width:600px;
-    border-radius:10%;
+    border-radius:50px;
 }
 #title{
     padding: 5px;
@@ -74,7 +74,7 @@ main{
 
     display: grid;
     align-items: center;
-
+    margin-bottom: 10px;
 }
 .entry {
     border-style: outset;
@@ -83,8 +83,8 @@ main{
     justify-content: flex-start;
     width: 500px ;
     padding: 20px;
-    grid-row: 5;
     grid-column: 1;
+    grid-row: 1;
     background-color:white;
     border-radius:10% / 50%;
 }
@@ -102,16 +102,22 @@ main{
     display:none;
 }
 #submit {
-    
+   /* position: absolute;*/
     margin-right:10px;
     background-color:cadetblue;
     justify-self: flex-end;
     grid-column: 1;
-    grid-row: 5;
+    grid-row: 1;
     font-size: 15pt;
     border-radius: 30% / 50%;
     width: 100px;
     height: 60px;
     
     
+}
+.static > div > div{
+    cursor:auto;
+}
+.static > div > div:active{
+    cursor:auto;
 }
