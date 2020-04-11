@@ -40,6 +40,11 @@ main{
     justify-content: center;
     align-items: center;
     width:100%;
+    flex-direction: column;
+}
+#levelRules{
+    font-size: 10pt;
+    max-width: 150px;
 }
 #reset{
     font-size: 15pt;

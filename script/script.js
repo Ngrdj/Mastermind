@@ -1,5 +1,6 @@
 /*--------------------------------------------------Variables------------------------------------------------------------*/
 const levelSelect = document.getElementById("levelSelect");
+const levelRules = document.getElementById("levelRules");
 const reset = document.getElementById("reset");
 
 const playerSeq = document.getElementById("playerSeq");
@@ -10,8 +11,6 @@ addEmptySlot();
 
 let colorBalls = document.querySelectorAll('.colorBall');
 let playerSeqSlot = document.querySelectorAll(".slot");
-
-
 
 let randomSeq = []
 
@@ -29,7 +28,6 @@ submit.addEventListener('click', ()=> {
         gameOver();
         }
     });
-
 submit.addEventListener('click', genRow);
 submit.addEventListener('click', compareSeq);
 
@@ -60,14 +58,23 @@ function gameOver() {
     alert("gameOver");
     reload();
 }
+
 function reload (){
+     
     console.log("reloaded")
+    
+    //on remet le compteur de partie à zéro et on génère une nouvelle séquence aléatoire
     counter = 0;
     genRandomSeq();
-
+    
+    //on supprime toute les ligne de classe "static"
     for (const row of document.querySelectorAll('.static')) {
         playerSeq.removeChild(row);
     }
+    
+    //On affiche la difficulté sélectionnée"
+    switchLevel();
+    
 }
 
 function addEmptySlot () {
@@ -87,9 +94,11 @@ function addEmptySlot () {
 function genRandomSeq () {
 
     randomSeq = [];
-    for(i=0;i<4;i++){
     
-        let nbalea = Math.floor(Math.random()*colorBalls.length);//génération d'un nombre aléatoire entre 0 et la longueur de la liste colorBalls
+    for(i=0;i<4;i++){
+        
+        //génération d'un nombre aléatoire entre 0 et la longueur de la liste colorBalls
+        let nbalea = Math.floor(Math.random()*colorBalls.length);
 
         randomSeq.push(colorBalls[nbalea].id);
     
@@ -136,13 +145,55 @@ function genRow () {
     //scroll auto sur la Séq courante.
     window.scroll(0,submit.offsetTop);
     
-    let currentRow=this.previousElementSibling;
+    //on cible l'élément précédant le bouton submit (séq actuelle) et on le déplace avec le bouton submit
+    const currentRow=this.previousElementSibling;
     currentRow.style.gridRow=counter+1;
     submit.style.gridRow=counter+1;
     
-    let newRow = currentRow.cloneNode(true); newRow.classList.add("static");
-    document.getElementById("playerSeq").appendChild(newRow);
+    //on crée une copie de la séquence en cours et on lui attribue la classe "static"
+    const newRow = currentRow.cloneNode(true);
+    newRow.classList.add("static");
+    
+    //on insère la copie dans le div "palyerSeq" et on lui attribue sa position
+    playerSeq.appendChild(newRow);
     newRow.style.gridRow=counter;
     
+    
+}
+
+function switchLevel () {
+   
+    let levelSelected = levelSelect.options[levelSelect.selectedIndex].value;
+    
+    const rule1 = document.getElementById("rule1");
+    const rule2 = document.getElementById("rule2");
+    
+    
+    switch(levelSelected) {
+    
+      case 'level1':
+            
+        console.log(levelSelected);
+            
+        rule1.innerHTML = "PAS de double couleur";
+        rule2.innerHTML = "Les emplacements NE peuvent PAS rester vides";
+        break;
+           
+      case 'level2':
+            
+        console.log(levelSelected);
+            
+        rule1.innerHTML = "PAS de double couleur";
+        rule2.innerHTML = "Les emplacements peuvent rester vides";
+             
+        break;
+      case 'level3':
+            
+        console.log(levelSelected);
+            
+        rule1.innerHTML = "Double couleur possible";
+        rule2.innerHTML = "Les emplacements peuvent rester vides";
+        break;
+    }
     
 }

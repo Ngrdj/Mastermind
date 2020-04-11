@@ -13,15 +13,21 @@
             <img id="title" src="img/mastermind.png">
             <div id="options">
                 <div id="level" >
-                    <label for="levelSelect">Difficulté : </label>
+                    <div>
+                        <label for="levelSelect">Difficulté : </label>
 
-                    <select name="levels" id="levelSelect">
+                        <select name="levels" id="levelSelect">
 
-                        <option value="level1">Niveau 1</option>
-                        <option value="level2">Niveau 2</option>
-                        <option value="level3">Niveau 3</option>
+                            <option value="level1">Niveau 1</option>
+                            <option value="level2">Niveau 2</option>
+                            <option value="level3">Niveau 3</option>
 
-                    </select>
+                        </select>
+                    </div>         
+                    <ul id="levelRules">
+                        <li id="rule1"></li>
+                        <li id="rule2"></li>
+                    </ul>
                 </div>
 
                 <button id="reset" type="button">Nouvelle partie</button>
