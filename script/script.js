@@ -1,20 +1,11 @@
 /*--------------------------------------------------Variables------------------------------------------------------------*/
 const levelSelect = document.getElementById("levelSelect");
-const submit = document.getElementById("submit");
 const reset = document.getElementById("reset");
 
-
-const red = document.getElementById("redBall");
-const blue = document.getElementById("blueBall");
-const green = document.getElementById("greenBall");
-const yellow = document.getElementById("yellowBall");
-const purple = document.getElementById("purpleBall");
-const orange = document.getElementById("orangeBall");
-const pink = document.getElementById("pinkBall");
-
 const playerSeq = document.getElementById("playerSeq");
+const submit = document.getElementById("submit");
 
-/*if(level3,level2){*/
+/*if(level3,level2){}*/
 addEmptySlot();
 
 let colorBalls = document.querySelectorAll('.colorBall');
@@ -39,7 +30,7 @@ submit.addEventListener('click', ()=> {
         }
     });
 
-submit.addEventListener('click', copyRow);
+submit.addEventListener('click', genRow);
 submit.addEventListener('click', compareSeq);
 
 reset.addEventListener('click',()=>{
@@ -57,7 +48,7 @@ levelSelect.addEventListener('change',()=>{
     if(reloadConfirm == true){
         reload();
     }else{
-        levelSelect.optSelected= currentlevel;
+        /*levelSelect.optSelected= currentlevel;*/
         console.log(levelSelect.options[0]);
     }
 });
@@ -140,7 +131,10 @@ function compareSeq () {
     console.log(resultArr);
 }
 
-function copyRow () {
+function genRow () {
+    
+    //scroll auto sur la Séq courante.
+    window.scroll(0,submit.offsetTop);
     
     let currentRow=this.previousElementSibling;
     currentRow.style.gridRow=counter+1;
@@ -149,9 +143,6 @@ function copyRow () {
     let newRow = currentRow.cloneNode(true); newRow.classList.add("static");
     document.getElementById("playerSeq").appendChild(newRow);
     newRow.style.gridRow=counter;
-    //empêcher le drag des newLines
-    /*console.log(newRow.children)
-    newRow.children.setAttribute("draggable", "false");*/
-    /*console.log(newRow);*/
+    
     
 }

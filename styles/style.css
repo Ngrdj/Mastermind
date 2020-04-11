@@ -1,9 +1,13 @@
 
+body{
+    font-size: 15pt;
+}
 main{
-     margin-left: auto;
+
+    margin-left: auto;
     margin-right: auto;
     display: grid;
-    grid-auto-rows: minmax(100px, auto);
+    grid-auto-rows: minmax(120px, auto);
     align-items: center;
     justify-content: center;
     background-color: #bfd8d9;
@@ -13,10 +17,36 @@ main{
 }
 #title{
     padding: 5px;
+    margin-bottom: 20px;
     width: 500px;
     background-color:cadetblue;
     border-style: outset;
     justify-self: center;
+}
+#options{
+    background-color: white;
+    display: flex;
+    grid-row: 2;
+    height : 100%;
+    justify-content: space-around;
+    padding: 10px;
+    border-radius: 10% / 50%;
+   
+}
+#level{
+    display: flex;
+    background-color: cadetblue;
+    border-radius: 20% / 50%;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+#reset{
+    font-size: 15pt;
+    background-color:cadetblue;
+    border-radius: 20% / 50%;
+    width: 100%;
+    
 }
 .ballSlot{
     
@@ -38,7 +68,7 @@ main{
     border-radius:10% / 50%;
     grid-row: 4;
     border-style: outset;
-    
+    margin-bottom: 20px;
 }
 .colorBall{
     cursor: grab;
@@ -70,11 +100,13 @@ main{
 #pinkBall{
     background-color:pink;
 }
-#playerSeq {
 
+#playerSeq {
+    grid-row: 3;
     display: grid;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 .entry {
     border-style: outset;
@@ -102,17 +134,21 @@ main{
     display:none;
 }
 #submit {
-   /* position: absolute;*/
+    
+    font-size: 15pt;
     margin-right:10px;
     background-color:cadetblue;
     justify-self: flex-end;
     grid-column: 1;
     grid-row: 1;
-    font-size: 15pt;
     border-radius: 30% / 50%;
     width: 100px;
     height: 60px;
     
+    
+}
+.static{
+    opacity: 0.6;
     
 }
 .static > div > div{

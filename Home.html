@@ -11,20 +11,31 @@
     <body>
         <main>
             <img id="title" src="img/mastermind.png">
-            <div>
-                <label for="levelSelect">Choisir un niveau de difficulté :</label>
+            <div id="options">
+                <div id="level" >
+                    <label for="levelSelect">Difficulté : </label>
 
-                <select name="levels" id="levelSelect">
+                    <select name="levels" id="levelSelect">
 
-                    <option value="level1">Niveau 1</option>
-                    <option value="level2">Niveau 2</option>
-                    <option value="level3">Niveau 3</option>
+                        <option value="level1">Niveau 1</option>
+                        <option value="level2">Niveau 2</option>
+                        <option value="level3">Niveau 3</option>
 
-                </select>
+                    </select>
+                </div>
+
+                <button id="reset" type="button">Nouvelle partie</button>
             </div>
-
-            <button id="reset" type="button">recommencer le jeu</button>
-
+            
+            <div id="playerSeq">
+                <div class="entry">
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                </div>
+                <button id="submit" type="button">Valider</button>
+            </div>
             <div id="colorBalls">
                 <div class="ballSlot">
                     <div id="redBall" class="colorBall" draggable="true"></div>
@@ -47,15 +58,6 @@
                 <div class="ballSlot">
                     <div id="pinkBall" class="colorBall" draggable="true"></div>
                 </div>
-            </div>
-            <div id="playerSeq">
-                <div class="entry">
-                    <div class="slot"></div>
-                    <div class="slot"></div>
-                    <div class="slot"></div>
-                    <div class="slot"></div>
-                </div>
-                <button id="submit" type="button">Valider</button>
             </div>
 
         </main>
