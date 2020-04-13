@@ -154,7 +154,18 @@ function reload (){
     for (const row of document.querySelectorAll('.static')) {
         playerSeq.removeChild(row);
     }
+    //On remet les couleur à leurs place ou on les supprime selon le niveau
     
+    /*if(levelSelected === "level3"){
+        
+        
+        
+    }else{
+        
+        
+        
+    }
+    */
     //on ajoute ou on supprime la colorball "vide"
     addEmptyBall();
     

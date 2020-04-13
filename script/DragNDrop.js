@@ -62,10 +62,36 @@ function dragDrop() {
     
     if(targetSlot.children.length > 0){
         
-        lastSlot.append(currentBall);
+        
+        if(levelSelected === "level3"){
+            
+            if(targetSlot.className === "ballSlot"){
+                lastSlot.append(currentBall);
+            }else{
+                targetSlot.removeChild(targetSlot.firstElementChild);
+                
+                const ballCopy = currentBall.cloneNode(true);
+            /*ballCopy.id = "newId";*/
+            targetSlot.append(ballCopy);
+            console.log(ballCopy);
+            }
+            
+        }else{
+            lastSlot.append(currentBall);
+        }
         
     }else{
-        targetSlot.append(currentBall);
+        
+        if(levelSelected === "level3"){
+            
+            const ballCopy = currentBall.cloneNode(true);
+            /*ballCopy.id = "newId";*/
+            targetSlot.append(ballCopy);
+            console.log(ballCopy);
+        }
+        else{
+            targetSlot.append(currentBall);
+        }
     }
     
 }
