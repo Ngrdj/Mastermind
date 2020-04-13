@@ -106,7 +106,22 @@ main{
 .pinkBall{
     background-color:pink;
 }
-
+.blackBall{
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    background-color:black;
+    justify-self: flex-end;
+    border-style: solid;
+}
+.whiteBall{
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    background-color:antiquewhite;
+    justify-self: flex-end;
+    border-style: solid;
+}
 #playerSeq {
     grid-row: 3;
     display: grid;

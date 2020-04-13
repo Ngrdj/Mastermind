@@ -9,11 +9,12 @@ const submit = document.getElementById("submit");
 
 let levelSelected = levelSelect.options[levelSelect.selectedIndex].value;
 
-/*let colorBalls = document.querySelectorAll('.colorBall');*/
 let colorBalls = document.getElementsByClassName('colorBall');
 let playerSeqSlot = document.querySelectorAll(".slot");
 
-let randomSeq = []
+let randomSeq = [];
+/*Tableau Noir et Blanc*/
+let resultArr = [];
 
 let counter = 0;
 
@@ -22,39 +23,59 @@ let counter = 0;
 document.addEventListener('DOMContentLoaded',reload);
 
 submit.addEventListener('click', ()=> {
-        counter++;
-        console.log(counter);
+        console.clear();
         if(counter >= 10) {
             gameOver();
             }
-    switch(levelSelected){
+        else{
             
-        case 'level1':
-            /*si il y a au moins 1 "empty slots"*/
-            /*if(){
-                alert("veuillez complèter entièrement la séquence")
-               }else {*/
+           switch(levelSelected){
+
+            case 'level1':
+                
+                let isEmpty = false;
+                
+                for (const item of playerSeqSlot) {
+        
+                    if(item.childElementCount === 0) {
+                        
+                        isEmpty = true;
+                        
+                }}
+                
+                /*si il y a au moins 1 "empty slots"*/
+                if(isEmpty === true){
+                    
+                    alert("veuillez complèter entièrement la séquence");
+                    
+                }
+                else{
+                        counter++;
+                        console.log("Nombre d'essai : ",counter);
+                        compareSeq();
+                        genRow();
+                        
+                }
+            break;
+
+            case 'level2':
+            case 'level3':
+                
+                counter++;
+                console.log("Essai N°",counter);
+                compareSeq();
                 genRow();
-                compareSeq(); 
-              /* }*/
-        break;
-           
-        case 'level2':
-            addEmptyBall ()
-            genRow();
-            compareSeq();
-        break;
-        case 'level3':
-            addEmptyBall ()
-            genRow();
-            compareSeq();
-        break;
-    }
+                
+            break;
+        } 
+            
+        }
+        
 });
     
 
 reset.addEventListener('click',()=>{
-    
+    console.clear();
     const reloadConfirm = confirm("Êtes vous sûr de vouloir recommencer la partie ?");
    if(reloadConfirm == true){
         reload();
@@ -62,12 +83,13 @@ reset.addEventListener('click',()=>{
 });                               
                                     
 levelSelect.addEventListener('change',()=>{
-    
+    console.clear();
     const reloadConfirm = confirm("Voulez vous changer de difficulté et recommencer la partie ?");
     
     if(reloadConfirm == true){
         reload();
     }else{
+        /*remettre l'ancien niveau*/
     }
 });
 
@@ -141,7 +163,7 @@ function addEmptyBall () {
 }
 
 function reload (){ 
-    
+
     console.log("reloaded")
     
     //On réassigne la valeur du niveau
@@ -154,7 +176,7 @@ function reload (){
     for (const row of document.querySelectorAll('.static')) {
         playerSeq.removeChild(row);
     }
-    //On remet les couleur à leurs place ou on les supprime selon le niveau
+    //On remet les couleurs à leurs place ou on les supprime selon le niveau
     
     /*if(levelSelected === "level3"){
         
@@ -174,17 +196,16 @@ function reload (){
     
     //On génère une nouvelle séquence aléatoire
     genRandomSeq();
-    console.log(randomSeq);
+    
+    
+    console.log("réponse : " + randomSeq);
 }
 
 function compareSeq () {
 
     let playerSeqValue=[];
-    let resultArr = [];
     
-    /*const pushBlack = resultArr.push("black");
-    const pushwhite = resultArr.push("white");*/
-    
+    // pour chaque emplacement laissé vide , on ajoute "empty" à la séquence du joueur
     for (const item of playerSeqSlot) {
         
         if(!item.hasChildNodes()){
@@ -196,44 +217,47 @@ function compareSeq () {
         }
     }
     
-   /* pushBlack.repeat(nombre element bonne pos);
-    pushwhite.repeat(nombre element retrouve);
     
-    if(playerSeqValue.some(e => array2.includes(e))){
-        
-    }*/
-    
-    playerSeqValue.forEach((playerItem, playerItemIndex) => {
-        randomSeq.forEach((gameItem, gameItemIndex) => {  
-            
-                 if(playerItem === gameItem){
-                     
-                    resultArr.push("white");
-                    
-                    if(playerItemIndex === gameItemIndex){
+    for(let playerI = 0; playerI < playerSeqValue.length;playerI++){
 
-                         resultArr.push("black");
-                    
-                    }
-                 }
-             })
-        })  
-    
-    /*randomSeq.forEach((gameItem, gameItemIndex) => {
-        playerSeqValue.forEach((playerItem, playerItemIndex) => {
-            
-            if(gameItem == playerItem){
-                
-                
-                if(gameItemIndex == playerItemIndex){
+        for(let gameI = 0; gameI < randomSeq.length;gameI++){
+            if(playerSeqValue[playerI] === randomSeq[gameI]){
+                resultArr.push("white");
+                if(playerI === gameI){
+                    resultArr.pop();
                     resultArr.push("black");
-                }else if (gameItemIndex !== playerItemIndex){
-                    resultArr.push("white");
+                    playerI++;
                 }
-            
-            }     
-        })
-    })*/
+            }
+            /*if((playerSeqValue[playerI] === randomSeq[gameI]) && (playerI === gameI)){
+
+                    resultArr.push("black");
+                    playerI++;
+
+                }else if((playerSeqValue[playerI] === randomSeq[gameI]) && !(playerI === gameI)){
+
+                    resultArr.push("white");
+                    playerI++;
+                }*/
+        }
+    }
+    /*
+        playerSeqValue.forEach((playerItem, playerItemIndex) => {
+            randomSeq.forEach((gameItem, gameItemIndex) => { 
+                
+                if((playerItem === gameItem) && (playerItemIndex === gameItemIndex)){
+
+                    resultArr.push("black");
+                    gameItemIndex = randomSeq.length;
+
+         
+                }else if((playerItem === gameItem) && !(playerItemIndex === gameItemIndex)){
+
+                    resultArr.push("white");
+                    gameItemIndex = randomSeq.length;
+                }
+            })
+        })*/
     
     console.log("séquence jeu : " + randomSeq); 
     console.log("séquence joueur : " + playerSeqValue);
@@ -254,11 +278,31 @@ function genRow () {
     const newRow = currentRow.cloneNode(true);
     newRow.classList.add("static");
     
-    //on insère la copie dans le div "palyerSeq" et on lui attribue sa position
+    //on insère la copie dans le div "palyerSeq" et on détermine sa position
     playerSeq.appendChild(newRow);
     newRow.style.gridRow=counter;
     
-    
+    //on crèe la séquence de réponse et on l'insère dans la "newRow"
+ 
+    resultArr.forEach((item) => {
+ 
+        if(item == "black"){
+            
+            /*blackBall*/
+            const blackBall = document.createElement("div");
+            blackBall.classList.add("blackBall");
+            newRow.appendChild(blackBall);
+            
+        }else if (item == "white"){
+            
+            /*whiteBall*/
+            const whiteBall = document.createElement("div");
+            whiteBall.classList.add("whiteBall");
+            newRow.appendChild(whiteBall);
+            
+        }
+    })
+    resultArr.splice(0);
 }
 
 function switchRulesText () {
@@ -299,4 +343,5 @@ function switchRulesText () {
 function gameOver() {
     alert("gameOver");
     reload();
+    
 }

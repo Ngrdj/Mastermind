@@ -52,7 +52,7 @@ function dragEnter(e) {
     
     e.preventDefault()
     targetSlot = this;
-    console.log(targetSlot.children.length);
+
 }
 function dragLeave() {
 
@@ -71,7 +71,6 @@ function dragDrop() {
                 targetSlot.removeChild(targetSlot.firstElementChild);
                 
                 const ballCopy = currentBall.cloneNode(true);
-            /*ballCopy.id = "newId";*/
             targetSlot.append(ballCopy);
             console.log(ballCopy);
             }
@@ -85,9 +84,7 @@ function dragDrop() {
         if(levelSelected === "level3"){
             
             const ballCopy = currentBall.cloneNode(true);
-            /*ballCopy.id = "newId";*/
             targetSlot.append(ballCopy);
-            console.log(ballCopy);
         }
         else{
             targetSlot.append(currentBall);
