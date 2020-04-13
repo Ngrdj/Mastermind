@@ -6,6 +6,7 @@ const ballSlots = document.querySelectorAll('.ballSlot');
 
 let currentBall;
 let lastSlot;
+let targetSlot;
 
 /*--------------------------------------------------Evenements------------------------------------------------------------*/
 
@@ -32,7 +33,8 @@ for (const ballSlot of ballSlots) {
 
 function dragStart() {
 
-currentBall=this;
+    currentBall=this;
+    lastSlot = this.parentElement;   
     
 }
 function dragEnd() {
@@ -49,20 +51,21 @@ function dragOver(e) {
 function dragEnter(e) {
     
     e.preventDefault()
+    targetSlot = this;
+    console.log(targetSlot.children.length);
+}
+function dragLeave() {
 
     
 }
-function dragLeave() {
-    console.log(this);
-lastSlot = this;
-    
-}
 function dragDrop() {
-    console.log(this.children.length)
-    if(this.children.length > 0){
+    
+    if(targetSlot.children.length > 0){
+        
         lastSlot.append(currentBall);
+        
     }else{
-        this.append(currentBall);
+        targetSlot.append(currentBall);
     }
     
 }

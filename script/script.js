@@ -1,4 +1,5 @@
 /*--------------------------------------------------Variables------------------------------------------------------------*/
+
 const levelSelect = document.getElementById("levelSelect");
 const levelRules = document.getElementById("levelRules");
 const reset = document.getElementById("reset");
@@ -6,10 +7,10 @@ const reset = document.getElementById("reset");
 const playerSeq = document.getElementById("playerSeq");
 const submit = document.getElementById("submit");
 
-/*if(level3,level2){}*/
-addEmptySlot();
+let levelSelected = levelSelect.options[levelSelect.selectedIndex].value;
 
-let colorBalls = document.querySelectorAll('.colorBall');
+/*let colorBalls = document.querySelectorAll('.colorBall');*/
+let colorBalls = document.getElementsByClassName('colorBall');
 let playerSeqSlot = document.querySelectorAll(".slot");
 
 let randomSeq = []
@@ -21,15 +22,36 @@ let counter = 0;
 document.addEventListener('DOMContentLoaded',reload);
 
 submit.addEventListener('click', ()=> {
+        counter++;
+        console.log(counter);
+        if(counter >= 10) {
+            gameOver();
+            }
+    switch(levelSelected){
+            
+        case 'level1':
+            /*si il y a au moins 1 "empty slots"*/
+            /*if(){
+                alert("veuillez complèter entièrement la séquence")
+               }else {*/
+                genRow();
+                compareSeq(); 
+              /* }*/
+        break;
+           
+        case 'level2':
+            addEmptyBall ()
+            genRow();
+            compareSeq();
+        break;
+        case 'level3':
+            addEmptyBall ()
+            genRow();
+            compareSeq();
+        break;
+    }
+});
     
-    counter++;
-    console.log(counter);
-    if(counter >= 10) {
-        gameOver();
-        }
-    });
-submit.addEventListener('click', genRow);
-submit.addEventListener('click', compareSeq);
 
 reset.addEventListener('click',()=>{
     
@@ -46,63 +68,102 @@ levelSelect.addEventListener('change',()=>{
     if(reloadConfirm == true){
         reload();
     }else{
-        /*levelSelect.optSelected= currentlevel;*/
-        console.log(levelSelect.options[0]);
     }
 });
 
-
-
 /*--------------------------------------------------Fonctions------------------------------------------------------------*/
-function gameOver() {
-    alert("gameOver");
-    reload();
+
+function genRandomSeq () {
+
+    randomSeq = [];
+    randomSeq.push(colorBalls[Math.floor(Math.random())].getAttribute("data-color"));
+    
+    let numberOfColors=1;
+    
+    for(i=0;i<numberOfColors;i++){
+        
+        if(numberOfColors<4){
+            
+            //génération d'un nombre aléatoire entre 0 et la longueur de la liste colorBalls
+            let nbalea = Math.floor(Math.random()*colorBalls.length);
+            let randomColor = colorBalls[nbalea].getAttribute("data-color");
+            
+            switch(levelSelected) {
+                    
+                case 'level1':
+                case 'level2':
+
+                    if(!randomSeq.includes(randomColor)){
+                        randomSeq.push(randomColor);
+                        numberOfColors++;
+                    }else{
+                        i--;
+                    }
+                    break;
+                case 'level3':
+
+                    randomSeq.push(randomColor);
+                    numberOfColors++;
+                    break;
+            }           
+        }      
+    }
 }
 
-function reload (){
-     
+function addEmptyBall () {
+    
+    const emptyBall = document.getElementById("empty");
+    
+    switch(levelSelected) {
+        
+        case 'level1':
+ 
+            if(emptyBall.className = "colorBall"){
+                
+                emptyBall.className = "emptyBall";
+                
+                
+            }
+            
+            break;
+           
+        case 'level2':
+        case 'level3':
+
+            if(emptyBall.className = "emptyBall"){
+                
+             emptyBall.className = "colorBall";
+                
+            }
+            
+            break;
+    }
+}
+
+function reload (){ 
+    
     console.log("reloaded")
     
-    //on remet le compteur de partie à zéro et on génère une nouvelle séquence aléatoire
+    //On réassigne la valeur du niveau
+    levelSelected = levelSelect.options[levelSelect.selectedIndex].value;
+    
+    //on remet le compteur de partie à zéro 
     counter = 0;
-    genRandomSeq();
     
     //on supprime toute les ligne de classe "static"
     for (const row of document.querySelectorAll('.static')) {
         playerSeq.removeChild(row);
     }
     
+    //on ajoute ou on supprime la colorball "vide"
+    addEmptyBall();
+    
     //On affiche la difficulté sélectionnée"
-    switchLevel();
+    switchRulesText();
     
-}
-
-function addEmptySlot () {
-    
-    const newSlot = document.createElement("div");
-    const emptyColor = document.createElement("div");
-    newSlot.appendChild(emptyColor);
-
-    emptyColor.id = "vide";
-    emptyColor.className = "colorBall";
-    newSlot.className = "ballSlot empty";
-
-    document.getElementById("colorBalls").appendChild(newSlot);
-    
-}
-
-function genRandomSeq () {
-
-    randomSeq = [];
-    
-    for(i=0;i<4;i++){
-        
-        //génération d'un nombre aléatoire entre 0 et la longueur de la liste colorBalls
-        let nbalea = Math.floor(Math.random()*colorBalls.length);
-
-        randomSeq.push(colorBalls[nbalea].id);
-    
-    }
+    //On génère une nouvelle séquence aléatoire
+    genRandomSeq();
+    console.log(randomSeq);
 }
 
 function compareSeq () {
@@ -110,30 +171,58 @@ function compareSeq () {
     let playerSeqValue=[];
     let resultArr = [];
     
+    /*const pushBlack = resultArr.push("black");
+    const pushwhite = resultArr.push("white");*/
+    
     for (const item of playerSeqSlot) {
         
         if(!item.hasChildNodes()){
-            playerSeqValue.push("vide");
+            playerSeqValue.push("empty");
         }
         else{
-            playerSeqValue.push(item.children.item(0).id);
+            playerSeqValue.push(item.children.item(0).getAttribute("data-color"));
 
         }
     }
+    
+   /* pushBlack.repeat(nombre element bonne pos);
+    pushwhite.repeat(nombre element retrouve);
+    
+    if(playerSeqValue.some(e => array2.includes(e))){
+        
+    }*/
+    
     playerSeqValue.forEach((playerItem, playerItemIndex) => {
         randomSeq.forEach((gameItem, gameItemIndex) => {  
             
-                 if(playerItem === gameItem && playerItemIndex === gameItemIndex){
+                 if(playerItem === gameItem){
                      
-                     resultArr.push("black")
-                     
-                 }else if(playerItem === gameItem && playerItemIndex !== gameItemIndex){
-                     
-                     resultArr.push("white")
-                     
+                    resultArr.push("white");
+                    
+                    if(playerItemIndex === gameItemIndex){
+
+                         resultArr.push("black");
+                    
+                    }
                  }
              })
-        })   
+        })  
+    
+    /*randomSeq.forEach((gameItem, gameItemIndex) => {
+        playerSeqValue.forEach((playerItem, playerItemIndex) => {
+            
+            if(gameItem == playerItem){
+                
+                
+                if(gameItemIndex == playerItemIndex){
+                    resultArr.push("black");
+                }else if (gameItemIndex !== playerItemIndex){
+                    resultArr.push("white");
+                }
+            
+            }     
+        })
+    })*/
     
     console.log("séquence jeu : " + randomSeq); 
     console.log("séquence joueur : " + playerSeqValue);
@@ -146,7 +235,7 @@ function genRow () {
     window.scroll(0,submit.offsetTop);
     
     //on cible l'élément précédant le bouton submit (séq actuelle) et on le déplace avec le bouton submit
-    const currentRow=this.previousElementSibling;
+    const currentRow=submit.previousElementSibling;
     currentRow.style.gridRow=counter+1;
     submit.style.gridRow=counter+1;
     
@@ -161,9 +250,7 @@ function genRow () {
     
 }
 
-function switchLevel () {
-   
-    let levelSelected = levelSelect.options[levelSelect.selectedIndex].value;
+function switchRulesText () {
     
     const rule1 = document.getElementById("rule1");
     const rule2 = document.getElementById("rule2");
@@ -196,4 +283,9 @@ function switchLevel () {
         break;
     }
     
+}
+
+function gameOver() {
+    alert("gameOver");
+    reload();
 }
