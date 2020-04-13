@@ -22,6 +22,7 @@ main{
     background-color:cadetblue;
     border-style: outset;
     justify-self: center;
+    border-radius:10px;
 }
 #options{
     background-color: white;
@@ -84,25 +85,25 @@ main{
 .colorBall:active {
     cursor: grabbing;
 }
-#blueBall{
+.blueBall{
     background-color:blue;
 }
-#redBall{
+.redBall{
     background-color:red;
 }
-#yellowBall{
+.yellowBall{
     background-color:yellow;
 }
-#greenBall{
+.greenBall{
     background-color:green;
 }
-#purpleBall{
+.purpleBall{
     background-color:purple;
 }
-#orangeBall{
+.orangeBall{
     background-color:orange;
 }
-#pinkBall{
+.pinkBall{
     background-color:pink;
 }
 
@@ -161,4 +162,7 @@ main{
 }
 .static > div > div:active{
     cursor:auto;
+}
+#levelSelect{
+    border-radius : 5px;
 }
