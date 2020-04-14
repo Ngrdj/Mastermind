@@ -12,12 +12,12 @@ let levelSelected = levelSelect.options[levelSelect.selectedIndex].value;
 let colorBalls = document.getElementsByClassName('colorBall');
 let playerSeqSlot = document.querySelectorAll(".slot");
 
+let playerSeqValue=[];
 let randomSeq = [];
 /*Tableau Noir et Blanc*/
 let resultArr = [];
 
 let counter = 0;
-
 /*--------------------------------------------------Evenements------------------------------------------------------------*/
 
 document.addEventListener('DOMContentLoaded',reload);
@@ -59,6 +59,7 @@ submit.addEventListener('click', ()=> {
             break;
 
             case 'level2':
+                   /*si le nbre d'elemnt unique est <4... */
             case 'level3':
                 
                 counter++;
@@ -203,7 +204,7 @@ function reload (){
 
 function compareSeq () {
 
-    let playerSeqValue=[];
+    playerSeqValue=[];
     
     // pour chaque emplacement laissé vide , on ajoute "empty" à la séquence du joueur
     for (const item of playerSeqSlot) {
@@ -258,7 +259,6 @@ function compareSeq () {
                 }
             })
         })*/
-    
     console.log("séquence jeu : " + randomSeq); 
     console.log("séquence joueur : " + playerSeqValue);
     console.log(resultArr);
