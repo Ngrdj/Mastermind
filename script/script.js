@@ -14,19 +14,25 @@ let playerSeqSlot = document.querySelectorAll(".slot");
 
 let playerSeqValue=[];
 let randomSeq = [];
-/*Tableau Noir et Blanc*/
+// Tableau Noir et Blanc
 let resultArr = [];
-
+// Compteur d'essai
 let counter = 0;
+// 
+let win = false;
+
 /*--------------------------------------------------Evenements------------------------------------------------------------*/
 
-document.addEventListener('DOMContentLoaded',reload);
+document.addEventListener('DOMContentLoaded',reload());
 
 submit.addEventListener('click', ()=> {
         console.clear();
+        console.log(resultArr);
+        
         if(counter >= 10) {
             gameOver();
-            }
+            }          
+           
         else{
             
            switch(levelSelected){
@@ -95,9 +101,8 @@ submit.addEventListener('click', ()=> {
         } 
             
         }
-        
-});
     
+});
 
 reset.addEventListener('click',()=>{
     console.clear();
@@ -105,8 +110,7 @@ reset.addEventListener('click',()=>{
    if(reloadConfirm == true){
         reload();
     }
-});                               
-                                    
+});                                   
 levelSelect.addEventListener('change',()=>{
     console.clear();
     const reloadConfirm = confirm("Voulez vous changer de difficulté et recommencer la partie ?");
@@ -286,6 +290,19 @@ function compareSeq () {
     console.log("séquence jeu : " + randomSeq); 
     console.log("séquence joueur : " + playerSeqValue);
     console.log(resultArr);
+    
+    resultArr.forEach(item =>{
+        if(!item === "black"){
+            win = false;
+        }
+        else{
+            win = true;
+        }     
+    });
+    if(win === true){
+        genRow();
+        gameOver();
+    }
 }
 
 function genRow () {
@@ -365,7 +382,13 @@ function switchRulesText () {
 }
 
 function gameOver() {
-    alert("gameOver");
+    
+    if(win === true){
+        alert("félicitation vous avez gagné !");
+    }else{
+        alert("désolé, vous avez perdu.");
+    }
+    
     reload();
     
 }
