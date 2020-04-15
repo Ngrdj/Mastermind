@@ -59,7 +59,31 @@ submit.addEventListener('click', ()=> {
             break;
 
             case 'level2':
+                   
+                   /*!Solution temporaire*/
+                   playerSeqArray2=[];
+                   
+                   for (const item of playerSeqSlot) {
+        
+                       if(item.childElementCount === 0){
+                           playerSeqArray2.push("empty")
+                       }else{
+                           playerSeqArray2.push(item.firstElementChild.getAttribute("data-color"));
+                           
+                       }
+                   }
                    /*si le nbre d'elemnt unique est <4... */
+                   if(Array.from(new Set (playerSeqArray2)).length < 4){
+                       
+                       alert("Il existe des éléments double");
+                       
+                   }else{
+                        counter++;
+                        console.log("Essai N°",counter);
+                        compareSeq();
+                        genRow();
+                   }
+                   break;
             case 'level3':
                 
                 counter++;
