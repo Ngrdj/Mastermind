@@ -127,7 +127,7 @@ levelSelect.addEventListener('change',()=>{
 function genRandomSeq () {
 
     randomSeq = [];
-    randomSeq.push(colorBalls[Math.floor(Math.random())].getAttribute("data-color"));
+    randomSeq.push(colorBalls[Math.floor(Math.random()*colorBalls.length)].getAttribute("data-color"));
     
     let numberOfColors=1;
     
@@ -251,12 +251,17 @@ function compareSeq () {
 
         for(let gameI = 0; gameI < randomSeq.length;gameI++){
             if(playerSeqValue[playerI] === randomSeq[gameI]){
-                resultArr.push("white");
+
                 if(playerI === gameI){
-                    resultArr.pop();
-                    resultArr.push("black");
-                    playerI++;
+
+                    resultArr.unshift("black"); 
+
+
+                } else {
+                    resultArr.push("white");
+
                 }
+            }
             }
             /*if((playerSeqValue[playerI] === randomSeq[gameI]) && (playerI === gameI)){
 
@@ -269,7 +274,7 @@ function compareSeq () {
                     playerI++;
                 }*/
         }
-    }
+    
     /*
         playerSeqValue.forEach((playerItem, playerItemIndex) => {
             randomSeq.forEach((gameItem, gameItemIndex) => { 
@@ -291,14 +296,16 @@ function compareSeq () {
     console.log("séquence joueur : " + playerSeqValue);
     console.log(resultArr);
     
-    resultArr.forEach(item =>{
+    /*resultArr.forEach(item =>{
         if(!item === "black"){
             win = false;
         }
         else{
             win = true;
         }     
-    });
+    });*/
+    win = resultArr.length === 4 && resultArr.every(item => item === "black");
+
     if(win === true){
         genRow();
         gameOver();
